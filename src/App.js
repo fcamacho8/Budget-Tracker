@@ -1,26 +1,52 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Jumbotron from "./components/Jumbotron/index"
+import Form from "./components/Form/index"
+import Table from "./components/Table/index"
+
+class App extends React.Component {
+  state = {
+    expenses: [], 
+    amount: "",
+    expense: "",
+    total: 0
+   
+  }
+
+  handleInputChange = event => {
+    let name = event.target.name;
+    let value = event.target.value;
+
+    this.setState({
+      [name]: value
+    });
+  };
+
+  handleFormSubmit = event => {
+    event.preventDefault();
+    if (this.state.expense && this.state.amount>0){
+      let tot = parseInt(this.state.total) + parseInt(this.state.amount)
+      let exArray = this.state.expenses
+      exArray.push([this.state.expense, this.state.amount, tot])
+      this.setState({
+        expenses: exArray,
+        total: tot,
+      });
+      console.log(exArray)
+    }
+  };
+  
+
+
+  render() {
+    return (
+      <div>
+        <Jumbotron />
+        <Form handleInputChange={this.handleInputChange} handleFormSubmit={this.handleFormSubmit}/>
+        <Table expense={this.state.expense} amount={this.state.amount} expenses={this.state.expenses}  />
+      </div>
+    );
+  }
 }
 
 export default App;

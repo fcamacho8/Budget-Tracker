@@ -2,6 +2,11 @@
 import React from "react";
 
 function Table(props) {
+    const tStyle = {
+        color: "red",
+        fontWeight: "bold"
+      }
+
     return (
         <div id="expenseTable">
             <table className="table table-striped">
@@ -16,8 +21,8 @@ function Table(props) {
                     {props.expenses.map(element => (
                         <tr key={element}>
                             <td>{element[0]}</td>
-                            <td>{element[1]}</td>
-                            <td>{element[2]}</td>
+                            <td>${element[1]}</td>
+                            <td style={tStyle}>${element[2]}</td>
                         </tr>
                     ))}
                 </tbody>

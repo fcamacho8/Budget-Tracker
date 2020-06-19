@@ -25,9 +25,12 @@ class App extends React.Component {
   handleFormSubmit = event => {
     event.preventDefault();
     if (this.state.expense && this.state.amount>0){
+
       let tot = parseInt(this.state.total) + parseInt(this.state.amount)
       let exArray = this.state.expenses
+
       exArray.push([this.state.expense, this.state.amount, tot])
+      
       this.setState({
         expenses: exArray,
         total: tot,
